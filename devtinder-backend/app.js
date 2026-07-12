@@ -11,9 +11,16 @@ const authRoutes = require("./src/routes/auth");
 const profileRoute = require("./src/routes/profile");
 const { requestRoute } = require("./src/routes/request");
 const { userRoute } = require("./src/routes/user");
+const cors = require("cors");
 const PORT = 3000;
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 app.use(cookieParser());
 
 //Signup and login
