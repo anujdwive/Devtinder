@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Box } from "@mui/material";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/screen/Login";
 import Layout from "./components/layout/Layout";
+import Dashboard from "./components/screen/Dashboard";
 
 function App() {
   return (
@@ -9,8 +9,9 @@ function App() {
       <Routes>
         {/* Layout wrapper */}
         <Route path='/' element={<Layout />}>
-          <Route index element={<Box>Hello</Box>} />
+          <Route index element={<Navigate to='/login' replace />} />
           <Route path='login' element={<Login />} />
+          <Route path='dashboard' element={<Dashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>

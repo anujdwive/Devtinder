@@ -6,12 +6,17 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, TextField } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
+import { addUser } from "../../store/slices/authSlice.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("anuj2@gmail.com");
   const [password, setPassword] = useState("Anuj@123");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -23,6 +28,9 @@ export default function Login() {
         },
         { withCredentials: true },
       );
+      console.log(res);
+      dispatch(addUser(res.data));
+      navigate("/dashboard");
     } catch (error) {
       console.error(error.message);
     }
