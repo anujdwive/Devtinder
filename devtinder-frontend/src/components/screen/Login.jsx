@@ -28,8 +28,11 @@ export default function Login() {
         },
         { withCredentials: true },
       );
-      console.log(res);
-      dispatch(addUser(res.data));
+      console.log("Full response:", res);
+      console.log("User data:", res.data.data);
+      console.log("Before Dispatch");
+      dispatch(addUser(res.data.data));
+      console.log("after dispatch");
       navigate("/dashboard");
     } catch (error) {
       console.error(error.message);

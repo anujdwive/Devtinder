@@ -1,20 +1,22 @@
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
+import TopBar from "./TopBar";
 
 const Layout = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       {/* Header */}
       <Box
-        sx={{
-          height: "80px",
-          bgcolor: "#42a5f5",
-          color: "#fff",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}>
-        Tinder
+      // sx={{
+      //   height: "80px",
+      //   bgcolor: "#42a5f5",
+      //   color: "#fff",
+      //   display: "flex",
+      //   alignItems: "center",
+      //   justifyContent: "center",
+      // }}
+      >
+        <TopBar />
       </Box>
 
       {/* Page Content */}
