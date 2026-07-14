@@ -38,13 +38,22 @@ const Dashboard = () => {
   console.log(feedUser);
 
   return (
-    <div>
-      {feedUser?.map((user) => (
-        <Box key={user._id}>
-          <Profile user={user} isOwnProfile={false} />
-        </Box>
-      ))}
-    </div>
+    <Box sx={{ height: "80vh", overflow: "auto" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 2,
+        }}>
+        {feedUser?.map((user) => (
+          <Box key={user._id}>
+            <Profile user={user} isOwnProfile={false} />
+          </Box>
+        ))}
+      </Box>
+    </Box>
   );
 };
 

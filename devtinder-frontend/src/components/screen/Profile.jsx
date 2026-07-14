@@ -80,7 +80,7 @@ export default function Profile({ user, isOwnProfile = false }) {
               </IconButton>
             )
           }
-          title={firstName + lastName || ""}
+          title={`${firstName} ${lastName}`}
           subheader={formatted}
         />
         <CardMedia
