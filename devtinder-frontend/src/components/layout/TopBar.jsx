@@ -43,7 +43,7 @@ function TopBar() {
   };
 
   const handleProfile = () => {
-    navigate("/profile", { replace: true });
+    navigate("/profilePage", { replace: true });
   };
 
   const handleLogout = async () => {

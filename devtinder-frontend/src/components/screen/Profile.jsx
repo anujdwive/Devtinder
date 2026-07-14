@@ -16,7 +16,6 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
-import { useSelector } from "react-redux";
 import EditProfileDrawer from "./EditProfileDrawer";
 
 const ExpandMore = styled((props) => {
@@ -43,9 +42,8 @@ const ExpandMore = styled((props) => {
   ],
 }));
 
-export default function Profile() {
+export default function Profile({ user, isOwnProfile = false }) {
   const [openDrawer, toggleDrawer] = React.useState(false);
-  const user = useSelector((state) => state.user);
   const [expanded, setExpanded] = React.useState(false);
   if (!user) {
     return <Box>No user Found</Box>;
@@ -76,9 +74,11 @@ export default function Profile() {
             </Avatar>
           }
           action={
-            <IconButton aria-label='settings'>
-              <EditIcon onClick={handleCloseDrawer} />
-            </IconButton>
+            isOwnProfile && (
+              <IconButton aria-label='settings'>
+                <EditIcon onClick={handleCloseDrawer} />
+              </IconButton>
+            )
           }
           title={firstName + lastName || ""}
           subheader={formatted}

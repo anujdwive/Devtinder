@@ -1,20 +1,25 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/screen/Login";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
 import Layout from "./components/layout/Layout";
 import Dashboard from "./components/screen/Dashboard";
-import Profile from "./components/screen/Profile";
+import Login from "./components/screen/Login";
+import ProfilePage from "./components/screen/ProfilePage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Layout wrapper */}
-        <Route path='/' element={<Layout />}>
-          <Route index element={<Navigate to='/login' replace />} />
-          <Route path='login' element={<Login />} />
-          <Route path='profile' element={<Profile />} />
-          <Route path='dashboard' element={<Dashboard />} />
+        {/* Public Route */}
+        <Route path='/login' element={<Login />} />
+
+        {/* Protected Layout */}
+        <Route element={<Layout />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+
+          <Route path='/profilePage' element={<ProfilePage />} />
         </Route>
+
+        <Route path='*' element={<Navigate to='/login' />} />
       </Routes>
     </BrowserRouter>
   );

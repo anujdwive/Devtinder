@@ -10,25 +10,43 @@ import { useState } from "react";
 import axios from "axios";
 import { addUser } from "../../store/slices/authSlice.js";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const [email, setEmail] = useState("anuj2@gmail.com");
   const [password, setPassword] = useState("Anuj@123");
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleLogin = async () => {
     try {
-      const res = await axios.post(
+      // login API
+
+      await axios.post(
         "http://localhost:3000/login",
         {
           email,
           password,
         },
-        { withCredentials: true },
+        {
+          withCredentials: true,
+        },
       );
+
+      // profile API
+
+      const profile = await axios.get("http://localhost:3000/profile", {
+        withCredentials: true,
+      });
+
+      // store user
+
+      dispatch(addUser(profile.data));
+
+      // move dashboard
+
       navigate("/dashboard");
     } catch (error) {
-      console.error(error.message);
+      console.log(error);
     }
   };
 
