@@ -13,8 +13,7 @@ const Dashboard = () => {
       const res = await axios.get("http://localhost:3000/profile", {
         withCredentials: true,
       });
-      console.log(res);
-      //   dispatch(addUser(res.data.data));
+      dispatch(addUser(res.data.data));
     } catch (error) {
       console.error(error);
       // ✅ If token expired or unauthorized

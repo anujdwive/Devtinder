@@ -41,6 +41,10 @@ function TopBar() {
     setAnchorElUser(null);
   };
 
+  const handleProfile = () => {
+    navigate("/profile", { replace: true });
+  };
+
   const handleLogout = async () => {
     try {
       await axios.post(
@@ -167,6 +171,8 @@ function TopBar() {
                     handleCloseUserMenu();
                     if (setting === "Logout") {
                       handleLogout();
+                    } else if (setting === "Profile") {
+                      handleProfile();
                     }
                   }}>
                   <Typography sx={{ textAlign: "center" }}>
