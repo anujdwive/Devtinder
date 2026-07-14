@@ -6,7 +6,7 @@ const profileRoute = express.Router();
 profileRoute.get("/profile", userAuth, async (req, res) => {
   try {
     const user = req.user;
-    res.send(user);
+    res.json({ data: user, message: "Fetch user detail successfuly!" });
   } catch (error) {
     res.status(500).send("ERROR: " + error.message);
   }
