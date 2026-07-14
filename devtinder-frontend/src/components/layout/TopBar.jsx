@@ -26,7 +26,7 @@ function TopBar() {
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { photoURL } = user;
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -45,6 +45,9 @@ function TopBar() {
   const handleProfile = () => {
     navigate("/profilePage", { replace: true });
   };
+  const handleDashboard = () => {
+    navigate("/dashboard", { replace: true });
+  };
 
   const handleLogout = async () => {
     try {
@@ -62,6 +65,10 @@ function TopBar() {
     }
   };
 
+  if (!user) {
+    return <Box>User not found!</Box>;
+  }
+  const { photoURL } = user;
   return (
     <AppBar position='static' sx={{ borderRadius: "0px" }}>
       <Container maxWidth='xl'>
@@ -174,6 +181,8 @@ function TopBar() {
                       handleLogout();
                     } else if (setting === "Profile") {
                       handleProfile();
+                    } else if (setting === "Dashboard") {
+                      handleDashboard();
                     }
                   }}>
                   <Typography sx={{ textAlign: "center" }}>

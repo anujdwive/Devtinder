@@ -40,7 +40,7 @@ export default function Login() {
 
       // store user
 
-      dispatch(addUser(profile.data));
+      dispatch(addUser(profile.data.data));
 
       // move dashboard
 
