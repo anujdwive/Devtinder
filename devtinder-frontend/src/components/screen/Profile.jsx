@@ -51,6 +51,13 @@ export default function Profile() {
     return <Box>No user Found</Box>;
   }
   const { firstName, lastName, about, skill, photoURL, updatedAt } = user;
+  const date = new Date(updatedAt);
+
+  const formatted = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -65,7 +72,7 @@ export default function Profile() {
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-              R
+              {firstName[0]}
             </Avatar>
           }
           action={
@@ -74,7 +81,7 @@ export default function Profile() {
             </IconButton>
           }
           title={firstName + lastName || ""}
-          subheader={updatedAt}
+          subheader={formatted}
         />
         <CardMedia
           component='img'

@@ -1,17 +1,38 @@
 import { Box, TextareaAutosize, TextField } from "@mui/material";
 import DynamicDrawer from "../layout/UI/drawer/DynamicDrawer";
 import { useState } from "react";
+import axios from "axios";
 
 const EditProfileDrawer = ({ open, handleClose }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [about, setAbout] = useState("");
-  const handleUpdate = () => {};
+  const handleUpdate = async () => {
+    const payload = {
+      firstName,
+      lastName,
+      photoURL,
+      about,
+    };
+    try {
+      const res = await axios.patch(
+        "http://localhost:3000/profile/edit",
+        payload,
+        {
+          withCredentials: true,
+        },
+      );
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <DynamicDrawer
       open={open}
       onClose={handleClose}
+      onPrimaryClick={handleUpdate}
       title='Edit Profile'
       primaryText='Update'
       customWidth={500}>
