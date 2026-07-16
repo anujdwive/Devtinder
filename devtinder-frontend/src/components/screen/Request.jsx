@@ -1,12 +1,28 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequest } from "../../store/slices/requestSlice";
+import { addRequest, removeRequest } from "../../store/slices/requestSlice";
 import { Avatar, Box, Button, Typography } from "@mui/material";
 
 const Request = () => {
   const dispatch = useDispatch();
   const request = useSelector((state) => state.request);
+
+  const fetchReviewRequest = async (status, _id) => {
+    try {
+      await axios.post(
+        "http://localhost:3000/review/request/" + status + "/" + _id,
+        {},
+        {
+          withCredentials: true,
+        },
+      );
+      dispatch(removeRequest(_id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const fetchRequest = async () => {
     try {
       const res = await axios.get(
@@ -26,7 +42,19 @@ const Request = () => {
     fetchRequest();
   }, []);
 
-  console.log(request);
+  if (!request) {
+    return (
+      <Box
+        sx={{
+          marginTop: 2,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        No more connection request!
+      </Box>
+    );
+  }
 
   return (
     <div
@@ -48,8 +76,12 @@ const Request = () => {
           <Avatar src={request.fromUserId.photoURL} />
           <Typography>{`${request.fromUserId.firstName} ${request.fromUserId.lastName}`}</Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Button>Accept</Button>
-            <Button>Reject</Button>
+            <Button onClick={() => fetchReviewRequest("accepted", request._id)}>
+              Accept
+            </Button>
+            <Button onClick={() => fetchReviewRequest("rejected", request._id)}>
+              Reject
+            </Button>
           </Box>
         </Box>
       ))}
