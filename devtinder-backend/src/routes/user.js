@@ -43,7 +43,7 @@ userRoute.get("/user/connections", userAuth, async (req, res) => {
           : row.fromUserId, // full user object ✅
     );
 
-    res.json({ data });
+    res.json({ data: data, message: "Fetch connection successfuly!" });
   } catch (error) {
     res.status(500).send("ERROR: " + error.message);
   }
