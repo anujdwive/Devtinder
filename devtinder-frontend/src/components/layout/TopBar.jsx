@@ -16,9 +16,11 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { removeFeedUser } from "../../store/slices/feedSlice";
+import { removeConnection } from "../../store/slices/connectionSlice";
 
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Connection", "Request", "Dashboard", "Logout"];
 
 function TopBar() {
   const user = useSelector((state) => state.user);
@@ -45,6 +47,12 @@ function TopBar() {
   const handleProfile = () => {
     navigate("/profilePage", { replace: true });
   };
+  const handleConnection = () => {
+    navigate("/connection", { replace: true });
+  };
+  const handleRequest = () => {
+    navigate("/request", { replace: true });
+  };
   const handleDashboard = () => {
     navigate("/dashboard", { replace: true });
   };
@@ -58,7 +66,7 @@ function TopBar() {
           withCredentials: true,
         },
       );
-      dispatch(removeUser());
+      dispatch(removeUser() && removeFeedUser() && removeConnection());
       navigate("/login", { replace: true });
     } catch (error) {
       console.error(error);
@@ -183,6 +191,10 @@ function TopBar() {
                       handleProfile();
                     } else if (setting === "Dashboard") {
                       handleDashboard();
+                    } else if (setting === "Connection") {
+                      handleConnection();
+                    } else if (setting === "Request") {
+                      handleRequest();
                     }
                   }}>
                   <Typography sx={{ textAlign: "center" }}>
