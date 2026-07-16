@@ -30,9 +30,18 @@ userRoute.get("/user/connections", userAuth, async (req, res) => {
         { toUserId: logedInUser._id, status: "accepted" },
         { fromUserId: logedInUser._id, status: "accepted" },
       ],
-    }).populate("fromUserId", USER_SAFE_DATA);
+    })
+      .populate("fromUserId", USER_SAFE_DATA)
+      .populate("toUserId", USER_SAFE_DATA);
 
-    const data = connectionRequest.map((row) => row.fromUserId);
+    const userId = logedInUser._id.toString();
+
+    const data = connectionRequest.map(
+      (row) =>
+        row.fromUserId._id.toString() === userId
+          ? row.toUserId // full user object ✅
+          : row.fromUserId, // full user object ✅
+    );
 
     res.json({ data });
   } catch (error) {
