@@ -39,7 +39,7 @@ const Connection = () => {
         <Box
           key={connection._id}
           sx={{
-            width: "60vw",
+            width: "40vw",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
