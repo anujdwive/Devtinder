@@ -35,7 +35,7 @@ const Connection = () => {
         justifyContent: "center",
         alignItems: "center",
       }}>
-      {connection.map((connection) => (
+      {connection?.map((connection) => (
         <Box
           key={connection._id}
           sx={{
